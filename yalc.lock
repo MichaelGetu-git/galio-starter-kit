@@ -1,0 +1,9 @@
+{
+  "version": "v1",
+  "packages": {
+    "galio-framework": {
+      "signature": "b9d9090ade4318fa88ca19e17347f99b",
+      "file": true
+    }
+  }
+}
