@@ -12,7 +12,7 @@ import NavigationMenu from '../components/NavigationMenu';
 
 const { height, width } = Dimensions.get('window');
 
-const Login = ({ navigation }) => {
+const Login = () => {
   const [email, setEmail] = useState('-');
   const [password, setPassword] = useState('-');
   const [isMenuOpen, setIsMenuOpen] = useState(false);
@@ -134,7 +134,7 @@ const Login = ({ navigation }) => {
             >
               Sign in
             </Button>
-            <Button color="transparent" shadowless onPress={() => navigation.navigate('Register')}>
+            <Button color="transparent" shadowless >
               <Text center color={theme.COLORS.ERROR} size={theme.SIZES.FONT * 0.75}>
                 {"Don't have an account? Sign Up"}
               </Text>
