@@ -9,7 +9,7 @@ export default function StackLayout() {
       <Stack
         screenOptions={{
           headerShown: false,
-          contentStyle: { paddingTop: 20 },
+          contentStyle: { paddingTop: 20, paddingBottom: 90 },
         }}
         style={{ flex: 1 }}
       >

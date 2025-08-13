@@ -23,7 +23,7 @@ const CustomTabBar = () => {
     {
       name: 'content/Article',
       label: 'Content',
-      icon: 'file-text',
+      icon: 'archive',
     },
     {
       name: 'ui/Components',
