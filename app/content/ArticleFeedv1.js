@@ -42,7 +42,6 @@ const ArticleFull = () => {
           <Card
             neutral
             fullBackgroundImage
-            onPress={() => navigation.navigate('News')}
             image="https://images.unsplash.com/photo-1536523552737-74ded3c0591c?ixlib=rb-0.3.5&auto=format&fit=crop&w=1351&q=80"
             authorImageSrc="http://i.pravatar.cc/100"
             authorTitle="Alin Gheorghe"

@@ -53,7 +53,7 @@ const Article = () => {
         <NavigationMenu
           isVisible={isMenuOpen}
           onClose={toggleMenu}
-          currentScreen="/auth/Login"
+          currentScreen="/content/Article"
         />
       </Block>
 

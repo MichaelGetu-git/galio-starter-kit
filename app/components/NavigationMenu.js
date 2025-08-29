@@ -1,17 +1,33 @@
-import React, { useState } from 'react';
+import React, { useEffect, useState } from 'react';
 import {
-  Modal, View, TouchableOpacity, StyleSheet, Dimensions, SafeAreaView, ScrollView
+  Modal, View, TouchableOpacity, StyleSheet, Dimensions, SafeAreaView, ScrollView, Animated
 } from 'react-native';
 import { router } from 'expo-router';
-import {
-  Block, Icon, Text
-} from 'galio-framework';
+import { Icon, Text } from 'galio-framework';
 import theme from '../theme';
 
-const { width, height } = Dimensions.get('screen');
+const { width } = Dimensions.get('screen');
 
 const NavigationMenu = ({ isVisible, onClose, currentScreen }) => {
   const [expandedSections, setExpandedSections] = useState({});
+  const [slideAnim] = useState(new Animated.Value(-width)); // start offscreen LEFT
+
+  // run animation whenever visibility changes
+  useEffect(() => {
+    if (isVisible) {
+      Animated.timing(slideAnim, {
+        toValue: 0,
+        duration: 300,
+        useNativeDriver: true,
+      }).start();
+    } else {
+      Animated.timing(slideAnim, {
+        toValue: -width,
+        duration: 300,
+        useNativeDriver: true,
+      }).start();
+    }
+  }, [isVisible]);
 
   const navigateToScreen = (screenName) => {
     onClose();
@@ -63,7 +79,7 @@ const NavigationMenu = ({ isVisible, onClose, currentScreen }) => {
         { name: '/content/Presentation', title: 'Presentation', icon: 'videocam', family: 'material' },
         { name: '/content/ArticleCover', title: 'Article Cover', icon: 'image', family: 'material' },
         { name: '/content/ArticleFeedv1', title: 'Article Feed v1', icon: 'list', family: 'ionicon' },
-        { name: '/content/ArticleFeedv2', title: 'Article Feed v2', icon: 'slideshow', family: 'ionicon' },
+        { name: '/content/ArticleFeedv2', title: 'Article Feed v2', icon: 'book', family: 'fontawesome' },
       ],
     },
   ];
@@ -79,11 +95,11 @@ const NavigationMenu = ({ isVisible, onClose, currentScreen }) => {
           ]}
           onPress={() => navigateToScreen(item.name)}
         >
-          <Icon 
-            name={item.icon} 
-            family={item.family} 
-            size={20} 
-            color={currentScreen === item.name ? theme.COLORS.WHITE : theme.COLORS.PRIMARY} 
+          <Icon
+            name={item.icon}
+            family={item.family}
+            size={20}
+            color={currentScreen === item.name ? theme.COLORS.WHITE : theme.COLORS.PRIMARY}
           />
           <Text style={[
             styles.menuText,
@@ -157,19 +173,25 @@ const NavigationMenu = ({ isVisible, onClose, currentScreen }) => {
 
   return (
     <Modal
-      animationType="slide"
       transparent={true}
       visible={isVisible}
       onRequestClose={onClose}
     >
       <View style={styles.modalOverlay}>
-        <TouchableOpacity 
-          style={styles.modalBackground} 
-          activeOpacity={1} 
+        {/* Dark background that closes the menu when tapped */}
+        <TouchableOpacity
+          style={styles.modalBackground}
+          activeOpacity={1}
           onPress={onClose}
         />
-        
-        <View style={styles.menuContainer}>
+
+        {/* Animate the menu sliding in from LEFT */}
+        <Animated.View
+          style={[
+            styles.menuContainer,
+            { transform: [{ translateX: slideAnim }] }
+          ]}
+        >
           <SafeAreaView style={styles.menuContent}>
             <View style={styles.menuHeader}>
               <Text style={styles.menuTitle}>Navigation</Text>
@@ -183,14 +205,14 @@ const NavigationMenu = ({ isVisible, onClose, currentScreen }) => {
               </TouchableOpacity>
             </View>
 
-            <ScrollView 
+            <ScrollView
               style={styles.menuScrollView}
               showsVerticalScrollIndicator={false}
             >
               {menuStructure.map((item, index) => renderMenuItem(item, index))}
             </ScrollView>
           </SafeAreaView>
-        </View>
+        </Animated.View>
       </View>
     </Modal>
   );
@@ -199,7 +221,7 @@ const NavigationMenu = ({ isVisible, onClose, currentScreen }) => {
 const styles = StyleSheet.create({
   modalOverlay: {
     flex: 1,
-    flexDirection: 'row-reverse',
+    flexDirection: 'row', // menu sits LEFT, background fills the rest
   },
   modalBackground: {
     flex: 1,
@@ -210,17 +232,16 @@ const styles = StyleSheet.create({
     maxWidth: 320,
     backgroundColor: theme.COLORS.WHITE,
     shadowColor: '#000',
-    shadowOffset: {
-      width: 2,
-      height: 0,
-    },
+    shadowOffset: { width: -2, height: 0 },
     shadowOpacity: 0.25,
     shadowRadius: 3.84,
     elevation: 5,
+    position: 'absolute',
+    left: 0,
+    top: 0,
+    bottom: 0,
   },
-  menuContent: {
-    flex: 1,
-  },
+  menuContent: { flex: 1 },
   menuHeader: {
     flexDirection: 'row',
     justifyContent: 'space-between',
@@ -235,12 +256,8 @@ const styles = StyleSheet.create({
     fontWeight: 'bold',
     color: theme.COLORS.BLACK,
   },
-  closeButton: {
-    padding: 5,
-  },
-  menuScrollView: {
-    flex: 1,
-  },
+  closeButton: { padding: 5 },
+  menuScrollView: { flex: 1 },
   menuItem: {
     flexDirection: 'row',
     alignItems: 'center',
@@ -249,19 +266,14 @@ const styles = StyleSheet.create({
     borderBottomWidth: 1,
     borderBottomColor: '#f8f8f8',
   },
-  activeMenuItem: {
-    backgroundColor: theme.COLORS.PRIMARY,
-  },
+  activeMenuItem: { backgroundColor: theme.COLORS.PRIMARY },
   menuText: {
     marginLeft: theme.SIZES.BASE,
     fontSize: theme.SIZES.FONT,
     color: theme.COLORS.BLACK,
     fontWeight: '500',
   },
-  activeMenuText: {
-    color: theme.COLORS.WHITE,
-    fontWeight: 'bold',
-  },
+  activeMenuText: { color: theme.COLORS.WHITE, fontWeight: 'bold' },
   sectionHeader: {
     flexDirection: 'row',
     justifyContent: 'space-between',
@@ -272,19 +284,14 @@ const styles = StyleSheet.create({
     borderBottomWidth: 1,
     borderBottomColor: '#e9ecef',
   },
-  sectionHeaderContent: {
-    flexDirection: 'row',
-    alignItems: 'center',
-  },
+  sectionHeaderContent: { flexDirection: 'row', alignItems: 'center' },
   sectionTitle: {
     marginLeft: theme.SIZES.BASE,
     fontSize: theme.SIZES.FONT * 1.1,
     color: theme.COLORS.BLACK,
     fontWeight: '600',
   },
-  sectionChildren: {
-    backgroundColor: '#fdfdfd',
-  },
+  sectionChildren: { backgroundColor: '#fdfdfd' },
   childMenuItem: {
     flexDirection: 'row',
     alignItems: 'center',
@@ -294,23 +301,15 @@ const styles = StyleSheet.create({
     borderBottomWidth: 1,
     borderBottomColor: '#f0f0f0',
   },
-  activeChildMenuItem: {
-    backgroundColor: theme.COLORS.PRIMARY,
-  },
-  childIconContainer: {
-    width: 20,
-    alignItems: 'center',
-  },
+  activeChildMenuItem: { backgroundColor: theme.COLORS.PRIMARY },
+  childIconContainer: { width: 20, alignItems: 'center' },
   childMenuText: {
     marginLeft: theme.SIZES.BASE * 0.75,
     fontSize: theme.SIZES.FONT * 0.9,
     color: theme.COLORS.BLACK,
     fontWeight: '400',
   },
-  activeChildMenuText: {
-    color: theme.COLORS.WHITE,
-    fontWeight: 'bold',
-  },
+  activeChildMenuText: { color: theme.COLORS.WHITE, fontWeight: 'bold' },
 });
 
 export default NavigationMenu;
