@@ -7,6 +7,7 @@ import {
   Dimensions,
   TouchableOpacity,
   SafeAreaView,
+  View
 } from 'react-native';
 import Constants from 'expo-constants';
 
@@ -32,19 +33,19 @@ const Article = () => {
   };
 
   return (
-    <SafeAreaView style={{ flex: 1, backgroundColor: theme.COLORS.WHITE }}>
-      <StatusBar barStyle="light-content" translucent backgroundColor="transparent" />
-
+    <View style={{ flex: 1, backgroundColor: theme.COLORS.WHITE }}>
+      <StatusBar barStyle="dark-content" translucent={false} backgroundColor={theme.COLORS.BLACK} />
       <Block style={styles.navbar}>
         <NavBar
           transparent
+          title="Article"
           left={(
             <Button
               onlyIcon
               icon="menu"
               iconFamily="ionicon"
-              iconSize={theme.SIZES.BASE}
-              iconColor={theme.COLORS.WHITE}
+              iconSize={20}
+              iconColor="#000"
               color="transparent"
               onPress={toggleMenu}
             />
@@ -57,15 +58,21 @@ const Article = () => {
         />
       </Block>
 
-      <ScrollView contentContainerStyle={{ paddingBottom: theme.SIZES.BASE * 2 }}>
-        <Image
-          source={{ uri: bgImage }}
-          resizeMode="cover"
-          style={{
-            width,
-            height: height * 0.55,
-          }}
-        />
+      <ScrollView contentContainerStyle={{ paddingBottom: theme.SIZES.BASE * 2}}>
+        {/* Container to reserve space for the absolutely positioned image */}
+        <View style={{ height: height * 0.55 }}>
+          <Image
+            source={{ uri: bgImage }}
+            resizeMode="cover"
+            style={{
+              position: 'absolute',
+              top: -statusBarHeight,
+              left: 0,
+              width,
+              height: height * 0.55 + statusBarHeight,
+            }}
+          />
+        </View>
 
         <Block center style={{ marginTop: -theme.SIZES.BASE * 2 }}>
           <Block style={styles.header}>
@@ -130,7 +137,7 @@ const Article = () => {
           </Block>
         </Block>
       </ScrollView>
-    </SafeAreaView>
+    </View>
   );
 };
 
@@ -143,13 +150,7 @@ const styles = StyleSheet.create({
     paddingHorizontal: theme.SIZES.BASE * 1.5,
     width,
   },
-  navbar: {
-    top: statusBarHeight,
-    left: 0,
-    right: 0,
-    zIndex: 9999,
-    position: 'absolute',
-  },
+
   text: {
     fontSize: theme.SIZES.FONT * 0.875,
     lineHeight: theme.SIZES.FONT * 1.25,

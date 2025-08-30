@@ -21,7 +21,7 @@ const Presentation = () => {
 
   return (
     <Block flex>
-      <StatusBar hidden={false} barStyle="light-content" />
+      <StatusBar barStyle="dark-content" translucent={false} backgroundColor={theme.COLORS.BLACK} />
       <Block style={styles.navbar}>
         <NavBar
           transparent

@@ -24,8 +24,7 @@ const ArticleCover = () => {
 
   return (
     <Block flex>
-      <StatusBar hidden={false} barStyle="light-content" />
-
+      <StatusBar barStyle="dark-content" translucent={false} backgroundColor={theme.COLORS.BLACK} />
       <Image
         style={styles.backgroundImage}
         source={{ uri: 'https://images.unsplash.com/photo-1537005081207-04f90e3ba640?fit=crop&w=764&q=80' }}
