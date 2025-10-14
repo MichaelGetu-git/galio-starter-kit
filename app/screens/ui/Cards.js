@@ -8,8 +8,8 @@ import { LinearGradient } from 'expo-linear-gradient';
 import {
   Card, Block, NavBar, Button,
 } from 'galio-framework';
-import theme from '../theme';
-import NavigationMenu from '../components/NavigationMenu';
+import theme from '../../theme';
+import NavigationMenu from '../../components/NavigationMenu';
 
 const { width } = Dimensions.get('screen');
 
@@ -94,7 +94,7 @@ const Cards = () => {
       <NavigationMenu
         isVisible={isMenuOpen}
         onClose={toggleMenu}
-        currentScreen="/ui/Cards"
+        currentScreen="/screens/ui/Cards"
       />
 
       <ScrollView contentContainerStyle={styles.cards}>

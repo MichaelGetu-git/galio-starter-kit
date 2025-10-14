@@ -10,11 +10,11 @@ import {
 import {
   Text, Button, Block, NavBar,
 } from 'galio-framework';
-import theme from '../theme';
-import NavigationMenu from '../components/NavigationMenu';
+import theme from '../../theme';
+import NavigationMenu from '../../components/NavigationMenu';
 
 const { height } = Dimensions.get('window');
-const orderConfirmedImage = require('../../assets/order_confirmed.png');
+const orderConfirmedImage = require('../../../assets/order_confirmed.png');
 
 const OrderConfirmed = () => {
   const [isMenuOpen, setIsMenuOpen] = useState(false);
@@ -42,7 +42,7 @@ const OrderConfirmed = () => {
       <NavigationMenu
         isVisible={isMenuOpen}
         onClose={toggleMenu}
-        currentScreen="/ui/OrderConfirmed"
+        currentScreen="/screens/ui/OrderConfirmed"
       />
 
       <Block flex center space="around" style={styles.container}>

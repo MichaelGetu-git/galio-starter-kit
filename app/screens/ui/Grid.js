@@ -6,8 +6,8 @@ import {
 import {
   Button, Icon, Block, Text, NavBar,
 } from 'galio-framework';
-import theme from '../theme';
-import NavigationMenu from '../components/NavigationMenu';
+import theme from '../../theme';
+import NavigationMenu from '../../components/NavigationMenu';
 
 const { width } = Dimensions.get('screen');
 const BASE_SIZE = theme.SIZES.BASE;
@@ -61,7 +61,7 @@ const Grid = () => {
       <NavigationMenu
         isVisible={isMenuOpen}
         onClose={toggleMenu}
-        currentScreen="/ui/Grid"
+        currentScreen="/screens/ui/Grid"
       />
 
       <Block style={styles.grid}>

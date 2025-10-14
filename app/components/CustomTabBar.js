@@ -2,7 +2,7 @@ import React from 'react';
 import { View, Text, TouchableOpacity, StyleSheet } from 'react-native';
 import { useRouter, usePathname } from 'expo-router';
 import { Icon } from 'galio-framework';
-import theme from './theme';
+import theme from '../theme';
 
 const CustomTabBar = () => {
   const router = useRouter();
@@ -16,17 +16,17 @@ const CustomTabBar = () => {
       icon: 'home',
     },
     {
-      name: 'auth/Login',
+      name: 'screens/auth/Login',
       label: 'Auth',
       icon: 'user-secret',
     },
     {
-      name: 'content/Article',
+      name: 'screens/content/Article',
       label: 'Content',
       icon: 'archive',
     },
     {
-      name: 'ui/Components',
+      name: 'screens/ui/Components',
       label: 'UI',
       icon: 'sliders',
     },

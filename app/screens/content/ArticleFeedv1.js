@@ -5,7 +5,7 @@ import {
 
 // Galio components
 import { Card, NavBar, Button } from 'galio-framework';
-import NavigationMenu from '../components/NavigationMenu'; // adjust path as needed
+import NavigationMenu from '../../components/NavigationMenu';
 
 const ArticleFull = () => {
   const [isMenuOpen, setIsMenuOpen] = useState(false);

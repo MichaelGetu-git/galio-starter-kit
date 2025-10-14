@@ -9,8 +9,8 @@ import Constants from 'expo-constants';
 import {
   Button, Block, Card, Text, Icon, NavBar,
 } from 'galio-framework';
-import theme from '../theme';
-import NavigationMenu from '../components/NavigationMenu';
+import theme from '../../theme';
+import NavigationMenu from '../../components/NavigationMenu';
 
 const Author = ({ avatar, title, caption }) => (
   <Block row shadow middle space="between" style={styles.author}>
@@ -84,7 +84,7 @@ const News = () => {
       <NavigationMenu
         isVisible={isMenuOpen}
         onClose={toggleMenu}
-        currentScreen="/auth/Login"
+        currentScreen="/screens/auth/Login"
       />
 
       <ScrollView style={{ flex: 1 }}>

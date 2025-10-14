@@ -12,8 +12,8 @@ import {
   Block, Icon, Text, NavBar, Button,
 } from 'galio-framework';
 
-import theme from '../theme';
-import NavigationMenu from '../components/NavigationMenu';
+import theme from '../../theme';
+import NavigationMenu from '../../components/NavigationMenu';
 
 const ArticleCover = () => {
   const [isMenuOpen, setIsMenuOpen] = useState(false);
