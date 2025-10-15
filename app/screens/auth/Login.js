@@ -23,6 +23,8 @@ const Login = () => {
     <Block safe flex style={{ backgroundColor: theme.COLORS.WHITE }}>
       <NavBar
         title="Sign In"
+        onLeftPress={() => navigation.openDrawer()}
+        style={Platform.OS === 'android' ? { marginTop: theme.SIZES.BASE } : null}
         left={(
           <Button
             onlyIcon
@@ -34,7 +36,6 @@ const Login = () => {
             onPress={toggleMenu}
           />
         )}
-        style={Platform.OS === 'android' ? { marginTop: theme.SIZES.BASE } : null}
       />
       <NavigationMenu
         isVisible={isMenuOpen}

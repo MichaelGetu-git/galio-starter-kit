@@ -2,10 +2,13 @@ import React from 'react';
 import { View, StyleSheet } from 'react-native';
 import { Stack } from 'expo-router';
 import CustomTabBar from './components/CustomTabBar';
+import { GalioProvider } from 'galio-framework';
+import theme from './theme';
 
 export default function StackLayout() {
   return (
-    <View style={styles.container}>
+    <GalioProvider theme={theme}>
+      <View style={styles.container}>
       <Stack
         screenOptions={{
           headerShown: false,
@@ -29,6 +32,7 @@ export default function StackLayout() {
       </Stack>
       <CustomTabBar />
     </View>
+    </GalioProvider>
   );
 }
 

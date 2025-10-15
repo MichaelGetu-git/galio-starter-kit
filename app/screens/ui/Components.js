@@ -7,6 +7,7 @@ import { LinearGradient } from 'expo-linear-gradient';
 // galio components
 import {
   Text, Block, Button, Card, NavBar, Input,
+  Icon,
 } from 'galio-framework';
 import theme from '../../theme';
 import NavigationMenu from '../../components/NavigationMenu';
@@ -17,6 +18,27 @@ const Components = () => {
   const [isMenuOpen, setIsMenuOpen] = useState(false);
 
   const toggleMenu = () => setIsMenuOpen(prev => !prev);
+
+  const title = "Components";
+  const transparent = false;
+  const bgColor = theme.COLORS.WHITE;
+  const back = false;
+  const white = false;
+  const iconColor = theme.COLORS.ICON;
+  const titleColor = theme.COLORS.BLACK;
+  const shadow = theme.COLORS.GREY;
+
+  // Calculate styles
+  const noShadow = ["Pro"].includes(title);
+  const headerStyles = [
+    !noShadow ? styles.shadow : null,
+    transparent ? { backgroundColor: "rgba(0,0,0,0)" } : null,
+  ];
+
+  const navbarStyles = [
+    styles.navbar,
+    bgColor && { backgroundColor: bgColor },
+  ];
 
   return (
     <Block safe flex>
@@ -146,7 +168,7 @@ const Components = () => {
               <NavBar
                 back
                 title="Chart"
-                leftStyle={{ marginRight: 0, minWidth: 40 }}
+                leftIconSize={32}
                 leftIconColor={theme.COLORS.MUTED}
                 rightStyle={{ alignSelf: 'center', minWidth: 40 }}
                 onLeftPress={() => Alert.alert('Back')}
@@ -154,9 +176,9 @@ const Components = () => {
                 right={(
                   <Button
                     onlyIcon
-                    icon="gear"
+                    icon="chevron-left"
                     color="transparent"
-                    iconFamily="fontawesome"
+                    iconFamily="fontawesome5"
                     iconColor={theme.COLORS.MUTED}
                     iconSize={theme.SIZES.BASE * 1.0625}
                     onPress={() => Alert.alert('Settings')}
@@ -164,13 +186,29 @@ const Components = () => {
                 )}
               />
 
+              {/* Custom NavBar - Fixed component name and structure */}
+              <NavBar
+                back={back}
+                title="Yared"
+                style={navbarStyles}
+                transparent={transparent}
+                rightStyle={{ alignItems: "center" }}
+                left={(
+                  <Icon name="menu" family="ionicon" color={iconColor} />
+                )}
+                leftStyle={{
+                  paddingVertical: 12,
+                  flex: 0.2,
+                  marginTop: -75,
+                }}
+              />
+
               {/* 2. Feed NavBar */}
               <NavBar
+                back
                 title="Feed"
-                titleStyle={{ alignSelf: 'flex-start', flex: 1 }}
+                titleStyle={{ alignSelf: 'flex-start'}}
                 onLeftPress={() => Alert.alert('Menu')}
-                leftStyle={{ flex: 0.4, minWidth: undefined }}
-                rightStyle={{ flexDirection: 'row', alignItems: 'center' }}
                 style={{ width, marginHorizontal: -(theme.SIZES.BASE - 2) }}
                 right={[
                   <Button
@@ -200,10 +238,9 @@ const Components = () => {
               {/* 3. Terms of Services NavBar */}
               <NavBar
                 back
+                leftIconSize={theme.SIZES.BASE * 2.0625}
                 title="Terms of Services"
-                leftStyle={{ flex: 0.4, minWidth: undefined }}
                 onLeftPress={() => Alert.alert('Back')}
-                titleStyle={{ alignSelf: 'flex-start', flex: 1 }}
                 style={{ width, marginHorizontal: -(theme.SIZES.BASE - 2) }}
                 right={[
                   <Button
@@ -234,7 +271,6 @@ const Components = () => {
               <NavBar
                 title="Discover"
                 style={{ backgroundColor: theme.COLORS.THEME, width, marginHorizontal: -(theme.SIZES.BASE - 2) }}
-                titleStyle={{ color: theme.COLORS.WHITE, flex: 1 }}
                 rightStyle={{ alignSelf: 'center', minWidth: 40 }}
                 leftIconColor={theme.COLORS.WHITE}
                 onLeftPress={() => Alert.alert('Menu')}
@@ -310,13 +346,81 @@ const Components = () => {
 };
 
 const styles = StyleSheet.create({
+  button: {
+    padding: 12,
+    position: "relative",
+  },
+  title: {
+    fontSize: 18,    
+    marginTop: -75, // margen del titulo
+    fontFamily: "montserrat-bold",
+  },
+  navbar: {
+    paddingVertical: 0,
+    paddingBottom: theme.SIZES.BASE * 1.5,
+    paddingTop: 100, // Altura del header
+    zIndex: 5,
+  },
+  shadow: {
+    backgroundColor: theme.COLORS.WHITE,
+    shadowColor: "black",
+    shadowOffset: { width: 0, height: 2 },
+    shadowRadius: 6,
+    shadowOpacity: 0.2,
+    elevation: 3,
+  },
+  notify: {
+    backgroundColor: theme.COLORS.SUCCESS, // Fixed: removed nowTheme reference
+    borderRadius: 4,
+    height: theme.SIZES.BASE / 2,
+    width: theme.SIZES.BASE / 2,
+    position: "absolute",
+    top: 9,
+    right: 11,
+  },
+  header: {
+    backgroundColor: theme.COLORS.WHITE,
+  },
+  divider: {
+    borderRightWidth: 0.3,
+    borderRightColor: theme.COLORS.ICON,
+  },
+  search: {
+    height: 48,
+    width: width - 32,
+    marginHorizontal: 16,
+    borderWidth: 1,
+    borderRadius: 30,
+    borderColor: theme.COLORS.BORDER, // Fixed: removed nowTheme reference
+  },
+  options: {
+    marginBottom: 24,
+    marginTop: 10,
+    elevation: 4,
+  },
+  tab: {
+    backgroundColor: theme.COLORS.TRANSPARENT,
+    width: width * 0.35,
+    borderRadius: 0,
+    borderWidth: 0,
+    height: 24,
+    elevation: 0,
+  },
+  tabTitle: {
+    lineHeight: 19,
+    fontWeight: "400",
+    color: theme.COLORS.HEADER, // Fixed: removed nowTheme reference
+  },
+  social: {
+    width: theme.SIZES.BASE * 3.5,
+    height: theme.SIZES.BASE * 3.5,
+    borderRadius: theme.SIZES.BASE * 1.75,
+    justifyContent: "center",
+  },
   container: {
     padding: 14,
     justifyContent: 'flex-start',
     backgroundColor: theme.COLORS.WHITE,
-  },
-  button: {
-    marginBottom: 20,
   },
   cards: {
     flex: 1,
