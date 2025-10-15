@@ -8,11 +8,11 @@ import Constants from 'expo-constants';
 import {
   Text, Button, Block, NavBar,
 } from 'galio-framework';
-import theme from '../theme';
-import NavigationMenu from '../components/NavigationMenu';
+import theme from '../../theme';
+import NavigationMenu from '../../components/NavigationMenu';
 
 const { width } = Dimensions.get('screen');
-const iphoneImage = require('../../assets/images/iphone.png');
+const iphoneImage = require('../../../assets/images/iphone.png');
 
 const Presentation = () => {
   const [isMenuOpen, setMenuOpen] = useState(false);
@@ -41,7 +41,7 @@ const Presentation = () => {
         <NavigationMenu
           isVisible={isMenuOpen}
           onClose={toggleMenu}
-          currentScreen="/auth/Login"
+          currentScreen="/screens/auth/Login"
         />
       </Block>
 

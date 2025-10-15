@@ -7,8 +7,8 @@ import {
 import {
   Block, Card, Text, NavBar, Button,
 } from 'galio-framework';
-import theme from '../theme';
-import NavigationMenu from '../components/NavigationMenu'; // adjust path
+import theme from '../../theme';
+import NavigationMenu from '../../components/NavigationMenu';
 
 const ArticleHalf = () => {
   const [isMenuOpen, setIsMenuOpen] = useState(false);

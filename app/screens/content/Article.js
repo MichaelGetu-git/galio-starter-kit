@@ -16,8 +16,8 @@ import {
   Block, Card, Text, Icon, NavBar,
   Button,
 } from 'galio-framework';
-import theme from '../theme';
-import NavigationMenu from '../components/NavigationMenu';
+import theme from '../../theme';
+import NavigationMenu from '../../components/NavigationMenu';
 
 const { width, height } = Dimensions.get('screen');
 const statusBarHeight = Constants.statusBarHeight;
@@ -54,7 +54,7 @@ const Article = () => {
         <NavigationMenu
           isVisible={isMenuOpen}
           onClose={toggleMenu}
-          currentScreen="/content/Article"
+          currentScreen="/screens/content/Article"
         />
       </Block>
 

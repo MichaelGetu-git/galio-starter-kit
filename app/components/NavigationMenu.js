@@ -51,9 +51,9 @@ const NavigationMenu = ({ isVisible, onClose, currentScreen }) => {
       family: 'material',
       type: 'section',
       children: [
-        { name: '/auth/Login', title: 'Login', icon: 'login', family: 'materialcommunity' },
-        { name: '/auth/Register', title: 'Register', icon: 'person-add', family: 'material' },
-        { name: '/auth/Registerv2', title: 'Register v2', icon: 'person', family: 'material' },
+        { name: '/screens/auth/Login', title: 'Login', icon: 'login', family: 'materialcommunity' },
+        { name: '/screens/auth/Register', title: 'Register', icon: 'person-add', family: 'material' },
+        { name: '/screens/auth/Registerv2', title: 'Register v2', icon: 'person', family: 'material' },
       ],
     },
     {
@@ -62,10 +62,10 @@ const NavigationMenu = ({ isVisible, onClose, currentScreen }) => {
       family: 'material',
       type: 'section',
       children: [
-        { name: '/ui/Components', title: 'Components', icon: 'cube', family: 'fontawesome' },
-        { name: '/ui/Cards', title: 'Cards', icon: 'album', family: 'materialcommunity' },
-        { name: '/ui/Grid', title: 'Grid', icon: 'layers', family: 'materialcommunity' },
-        { name: '/ui/OrderConfirmed', title: 'Order Confirmed', icon: 'check-circle', family: 'material' },
+        { name: '/screens/ui/Components', title: 'Components', icon: 'cube', family: 'fontawesome' },
+        { name: '/screens/ui/Cards', title: 'Cards', icon: 'album', family: 'materialcommunity' },
+        { name: '/screens/ui/Grid', title: 'Grid', icon: 'layers', family: 'materialcommunity' },
+        { name: '/screens/ui/OrderConfirmed', title: 'Order Confirmed', icon: 'check-circle', family: 'material' },
       ],
     },
     {
@@ -74,12 +74,12 @@ const NavigationMenu = ({ isVisible, onClose, currentScreen }) => {
       family: 'material',
       type: 'section',
       children: [
-        { name: '/content/News', title: 'News', icon: 'newspaper', family: 'material' },
-        { name: '/content/Article', title: 'Article', icon: 'receipt', family: 'material' },
-        { name: '/content/Presentation', title: 'Presentation', icon: 'videocam', family: 'material' },
-        { name: '/content/ArticleCover', title: 'Article Cover', icon: 'image', family: 'material' },
-        { name: '/content/ArticleFeedv1', title: 'Article Feed v1', icon: 'list', family: 'ionicon' },
-        { name: '/content/ArticleFeedv2', title: 'Article Feed v2', icon: 'book', family: 'fontawesome' },
+        { name: '/screens/content/News', title: 'News', icon: 'newspaper', family: 'material' },
+        { name: '/screens/content/Article', title: 'Article', icon: 'receipt', family: 'material' },
+        { name: '/screens/content/Presentation', title: 'Presentation', icon: 'videocam', family: 'material' },
+        { name: '/screens/content/ArticleCover', title: 'Article Cover', icon: 'image', family: 'material' },
+        { name: '/screens/content/ArticleFeedv1', title: 'Article Feed v1', icon: 'list', family: 'ionicon' },
+        { name: '/screens/content/ArticleFeedv2', title: 'Article Feed v2', icon: 'book', family: 'fontawesome' },
       ],
     },
   ];

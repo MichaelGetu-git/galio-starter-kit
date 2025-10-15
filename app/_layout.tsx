@@ -1,7 +1,7 @@
 import React from 'react';
 import { View, StyleSheet } from 'react-native';
 import { Stack } from 'expo-router';
-import CustomTabBar from './CustomTabBar';
+import CustomTabBar from './components/CustomTabBar';
 
 export default function StackLayout() {
   return (
@@ -14,18 +14,18 @@ export default function StackLayout() {
         style={{ flex: 1 }}
       >
         <Stack.Screen name="index" />
-        <Stack.Screen name="auth/Login" />
-        <Stack.Screen name="auth/Register" />
-        <Stack.Screen name="auth/Registerv2" />
-        <Stack.Screen name="ui/Components" />
-        <Stack.Screen name="ui/Cards" />
-        <Stack.Screen name="ui/Grid" />
-        <Stack.Screen name="ui/OrderConfirmed" />
-        <Stack.Screen name="content/News" />
-        <Stack.Screen name="content/Article" />
-        <Stack.Screen name="content/ArticleCover" />
-        <Stack.Screen name="content/ArticleFeedv1" />
-        <Stack.Screen name="content/ArticleFeedv2" />
+        <Stack.Screen name="screens/auth/Login" />
+        <Stack.Screen name="screens/auth/Register" />
+        <Stack.Screen name="screens/auth/Registerv2" />
+        <Stack.Screen name="screens/ui/Components" />
+        <Stack.Screen name="screens/ui/Cards" />
+        <Stack.Screen name="screens/ui/Grid" />
+        <Stack.Screen name="screens/ui/OrderConfirmed" />
+        <Stack.Screen name="screens/content/News" />
+        <Stack.Screen name="screens/content/Article" />
+        <Stack.Screen name="screens/content/ArticleCover" />
+        <Stack.Screen name="screens/content/ArticleFeedv1" />
+        <Stack.Screen name="screens/content/ArticleFeedv2" />
       </Stack>
       <CustomTabBar />
     </View>

@@ -10,8 +10,8 @@ import {
 import {
   Block, Button, Input, Text, NavBar,
 } from 'galio-framework';
-import theme from '../theme';
-import NavigationMenu from '../components/NavigationMenu';
+import theme from '../../theme';
+import NavigationMenu from '../../components/NavigationMenu';
 
 const { width } = Dimensions.get('window');
 
@@ -70,7 +70,7 @@ Password: ${password}`);
       <NavigationMenu
         isVisible={state.isMenuOpen}
         onClose={toggleMenu}
-        currentScreen="/auth/Login"
+        currentScreen="/screens/auth/Login"
       />
       <ScrollView style={styles.flex} keyboardShouldPersistTaps="handled">
         <KeyboardAvoidingView
