@@ -1,14 +1,15 @@
-import React from 'react';
+import React, { useState } from 'react';
 import {
-  ScrollView, StyleSheet, Dimensions, Platform, TouchableOpacity
+  ScrollView, StyleSheet, Dimensions, Platform,
 } from 'react-native';
 import { LinearGradient } from 'expo-linear-gradient';
 
 // Galio components
 import {
-  Card, Block, NavBar, Icon
+  Card, Block, NavBar, Button,
 } from 'galio-framework';
-import theme from '../theme';
+import theme from '../../theme';
+import NavigationMenu from '../../components/NavigationMenu';
 
 const { width } = Dimensions.get('screen');
 
@@ -53,6 +54,7 @@ const cards = [
     avatar: 'http://i.pravatar.cc/100',
     title: 'Christopher Moon',
     caption: '138 minutes ago',
+    location: 'Los Angeles, CA',
     full: true,
   },
   {
@@ -61,60 +63,75 @@ const cards = [
     avatar: 'http://i.pravatar.cc/100',
     title: 'Christopher Moon',
     caption: '138 minutes ago',
+    location: 'Los Angeles, CA',
     full: true,
   },
 ];
 
-export default class Cards extends React.Component {
-  render() {
-    const { navigation } = this.props;
-    return (
-      <Block safe flex style={{ backgroundColor: theme.COLORS.WHITE }}>
-        <NavBar
-          title="Cards"
-          left={(
-            <TouchableOpacity onPress={() => navigation.openDrawer()}>
-              <Icon 
-                name="menu"
-                family="feather"
-                size={theme.SIZES.BASE}
-                color={theme.COLORS.ICON}
-              />
-            </TouchableOpacity>
-          )}
-          style={Platform.OS === 'android' ? { marginTop: theme.SIZES.BASE } : null}
-        />
-        <ScrollView contentContainerStyle={styles.cards}>
-          <Block flex space="between">
-            {cards && cards.map((card, id) => (
-              <Card
-                key={`card-${card.image}`}
-                flex
-                borderless
-                shadowColor={theme.COLORS.BLACK}
-                titleColor={card.full ? theme.COLORS.WHITE : null}
-                style={styles.card}
-                title={card.title}
-                caption={card.caption}
-                location={card.location}
-                avatar={`${card.avatar}?${id}`}
-                image={card.image}
-                imageStyle={[card.padded ? styles.rounded : null]}
-                imageBlockStyle={[
-                  card.padded ? { padding: theme.SIZES.BASE / 2 } : null,
-                  card.full ? null : styles.noRadius,
-                ]}
-                footerStyle={card.full ? styles.full : null}
-              >
-                {card.full ? <LinearGradient colors={['transparent', 'rgba(0,0,0, 0.8)']} style={styles.gradient} /> : null}
-              </Card>
-            ))}
-          </Block>
-        </ScrollView>
-      </Block>
-    );
-  }
-}
+const Cards = () => {
+  const [isMenuOpen, setIsMenuOpen] = useState(false);
+
+  const toggleMenu = () => setIsMenuOpen(prev => !prev);
+
+  return (
+    <Block safe flex style={{ backgroundColor: theme.COLORS.WHITE }}>
+      <NavBar
+        title="Cards"
+        left={(
+          <Button
+            onlyIcon
+            icon="menu"
+            iconFamily="ionicon"
+            iconSize={theme.SIZES.BASE}
+            iconColor={theme.COLORS.ICON}
+            color="transparent"
+            onPress={toggleMenu}
+          />
+        )}
+        style={Platform.OS === 'android' ? { marginTop: theme.SIZES.BASE } : undefined}
+      />
+
+      <NavigationMenu
+        isVisible={isMenuOpen}
+        onClose={toggleMenu}
+        currentScreen="/screens/ui/Cards"
+      />
+
+      <ScrollView contentContainerStyle={styles.cards}>
+        <Block flex space="between">
+          {cards.map((card, id) => (
+            <Card
+              key={`card-${card.image}-${id}`}
+              flex
+              borderless
+              shadowColor={theme.COLORS.BLACK}
+              titleColor={card.full ? theme.COLORS.WHITE : null}
+              style={styles.card}
+              title={card.title}
+              caption={card.caption}
+              location={card.location}
+              avatar={`${card.avatar}?${id}`}
+              image={card.image}
+              imageStyle={card.padded ? styles.rounded : null}
+              imageBlockStyle={[
+                card.padded ? { padding: theme.SIZES.BASE / 2 } : null,
+                card.full ? null : styles.noRadius,
+              ]}
+              footerStyle={card.full ? styles.full : null}
+            >
+              {card.full && (
+                <LinearGradient
+                  colors={['transparent', 'rgba(0,0,0, 0.8)']}
+                  style={styles.gradient}
+                />
+              )}
+            </Card>
+          ))}
+        </Block>
+      </ScrollView>
+    </Block>
+  );
+};
 
 const styles = StyleSheet.create({
   cards: {
@@ -153,3 +170,5 @@ const styles = StyleSheet.create({
     borderBottomLeftRadius: theme.SIZES.BASE * 0.5,
   },
 });
+
+export default Cards;

@@ -70,5 +70,4 @@ const normalize = (size) => {
     return size * 1.4;
   } return size;
 };
-
-module.exports = normalize; // eslint-disable-line no-undefƒ
+export default normalize;

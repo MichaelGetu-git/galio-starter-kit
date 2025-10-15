@@ -1,31 +1,45 @@
+
+
 {
   "expo": {
     "name": "galio-native-kit",
     "description": "Build amazing apps in one codebase. //wip from sdk30 to sdk33",
     "slug": "galio-native-kit",
-    "privacy": "public",
-    "sdkVersion": "35.0.0",
-    "platforms": [
-      "ios",
-      "android"
-    ],
     "version": "1.0.0",
     "orientation": "portrait",
+    
+    "scheme": "galiostarter",
+    "userInterfaceStyle": "automatic",
     "icon": "./assets/icon.png",
-    "splash": {
-      "image": "./assets/splash.png",
-      "resizeMode": "cover",
-      "backgroundColor": "#FE2472"
-    },
-    "updates": {
-      "fallbackToCacheTimeout": 0
-    },
-    "assetBundlePatterns": [
-      "**/*"
-    ],
+    "newArchEnabled": true,
     "ios": {
       "supportsTablet": true
     },
-    "githubUrl": "https://github.com/galio-org/galio"
+    "android": {
+      "adaptiveIcon": {
+        "backgroundColor": "#ffffff"
+      },
+      "edgeToEdgeEnabled": true
+    },
+    "web": {
+      "bundler": "metro",
+      "output": "static",
+      "favicon": "./assets/images/favicon.png"
+    },
+    "plugins": [
+      "expo-router",
+      [
+        "expo-splash-screen",
+        {
+          "image": "./assets/images/splash-icon.png",
+          "imageWidth": 200,
+          "resizeMode": "contain",
+          "backgroundColor": "#ffffff"
+        }
+      ]
+    ],
+    "experiments": {
+      "typedRoutes": true
+    }
   }
 }

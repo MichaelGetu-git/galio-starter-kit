@@ -1,4 +1,4 @@
-import React from 'react';
+import React, { useState } from 'react';
 import {
   Alert,
   Dimensions,
@@ -10,7 +10,8 @@ import {
 import {
   Block, Button, Input, Text, NavBar,
 } from 'galio-framework';
-import theme from '../theme';
+import theme from '../../theme';
+import NavigationMenu from '../../components/NavigationMenu';
 
 const { width } = Dimensions.get('window');
 
@@ -18,74 +19,85 @@ const MARGIN_LEFT = '5%';
 const SOCIAL_ICON_SIZE = theme.SIZES.BASE * 1.5;
 const SOCIAL_BTN_SIZE = theme.SIZES.BASE * 3;
 
-class Registerv2 extends React.Component {
-  state = {
+const Registerv2 = () => {
+  const [state, setState] = useState({
     name: '',
     lastName: '',
     email: '',
     password: '',
+    isMenuOpen: false,
+  });
+
+
+  const handleChange = (name, value) => {
+    setState(prev => ({ ...prev, [name]: value }));
   };
 
-  handleGoBack = () => this.props.navigation.openDrawer();
+  const handleOnPressSocial = () => Alert.alert('Oops', 'Not Implemented');
 
-  handleChange = (name, value) => {
-    this.setState({ [name]: value });
-  };
-
-  handleOnPressSocial = () => Alert.alert('Oops', 'Not Implementated');
-
-  handleSignUp = () => {
+  const handleSignUp = () => {
     const {
       name, lastName, email, password,
-    } = this.state;
+    } = state;
 
     Alert.alert('Sign up action', `Name: ${name}
-    Last Name: ${lastName}
-    Email: ${email}
-    Password: ${password}`);
-  }
+Last Name: ${lastName}
+Email: ${email}
+Password: ${password}`);
+  };
 
-  handleSignIn = () => this.props.navigation.navigate('Login')
 
-  render() {
-    return (
-      <Block safe flex style={styles.container}>
-        <NavBar
-          transparent
-          back
-          leftStyle={{ marginLeft: MARGIN_LEFT }}
-          leftIconColor={theme.COLORS.GREY}
-          onLeftPress={this.handleGoBack}
-        />
-        <ScrollView style={styles.flex} keyboardShouldPersistTaps="handled">
-          <KeyboardAvoidingView
-            behavior="position"
-            keyboardVerticalOffset={5}
-          >
-            <Header title="Create new account" />
-            <Block flex>
-              <SocialButtons
-                onPressFacebook={this.handleOnPressSocial}
-                onPressTwitter={this.handleOnPressSocial}
-                onPressInstagram={this.handleOnPressSocial}
-              />
-              <Text muted center size={theme.SIZES.FONT * 0.875}>
-                or Sign Up with email
-              </Text>
-            </Block>
-            <Block flex middle>
-              <Form handleChange={this.handleChange} />
-              <SignButtons
-                handleSignIn={this.handleSignIn}
-                handleSignUp={this.handleSignUp}
-              />
-            </Block>
-          </KeyboardAvoidingView>
-        </ScrollView>
-      </Block>
-    );
-  }
-}
+  const toggleMenu = () => {
+    setState(prev => ({ ...prev, isMenuOpen: !prev.isMenuOpen }));
+  };
+
+  return (
+    <Block safe flex style={styles.container}>
+      <NavBar
+        title="Sign Up"
+        left={(
+          <Button
+            onlyIcon
+            icon="menu"
+            iconFamily="ionicon"
+            iconSize={theme.SIZES.BASE}
+            iconColor={theme.COLORS.ICON}
+            color="transparent"
+            onPress={toggleMenu}
+          />
+        )}
+      />
+      <NavigationMenu
+        isVisible={state.isMenuOpen}
+        onClose={toggleMenu}
+        currentScreen="/screens/auth/Login"
+      />
+      <ScrollView style={styles.flex} keyboardShouldPersistTaps="handled">
+        <KeyboardAvoidingView
+          behavior="position"
+          keyboardVerticalOffset={5}
+        >
+          <Header title="Create new account" />
+          <Block flex>
+            <SocialButtons
+              onPressFacebook={handleOnPressSocial}
+              onPressTwitter={handleOnPressSocial}
+              onPressInstagram={handleOnPressSocial}
+            />
+            <Text muted center size={theme.SIZES.FONT * 0.875}>
+              or Sign Up with email
+            </Text>
+          </Block>
+          <Block flex middle>
+            <Form handleChange={handleChange} />
+            <SignButtons
+            />
+          </Block>
+        </KeyboardAvoidingView>
+      </ScrollView>
+    </Block>
+  );
+};
 
 const Header = ({ title }) => (
   <Block left style={styles.header}>
@@ -110,7 +122,7 @@ const SocialButtons = ({
         onlyIcon
         iconSize={SOCIAL_ICON_SIZE}
         icon="facebook"
-        iconFamily="FontAwesome"
+        iconFamily="fontisto"
         onPress={onPressFacebook}
         color={theme.COLORS.FACEBOOK}
         shadowColor={theme.COLORS.FACEBOOK}
@@ -124,7 +136,7 @@ const SocialButtons = ({
         onlyIcon
         iconSize={SOCIAL_ICON_SIZE}
         icon="twitter"
-        iconFamily="FontAwesome"
+        iconFamily="fontisto"
         onPress={onPressTwitter}
         color={theme.COLORS.TWITTER}
         shadowColor={theme.COLORS.TWITTER}
@@ -138,7 +150,7 @@ const SocialButtons = ({
         onlyIcon
         iconSize={SOCIAL_ICON_SIZE}
         icon="instagram"
-        iconFamily="FontAwesome"
+        iconFamily="fontisto"
         onPress={onPressInstagram}
         color={theme.COLORS.DRIBBBLE}
         shadowColor={theme.COLORS.DRIBBBLE}
@@ -148,7 +160,6 @@ const SocialButtons = ({
     </Block>
   </Block>
 );
-
 
 const Form = ({ handleChange }) => (
   <Block style={{ marginBottom: 20 }}>
